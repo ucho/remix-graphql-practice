@@ -1,0 +1,8 @@
+schema: nestjs-jokes/src/schema.graphql
+documents: remix-jokes/app/**/*.{ts,tsx}
+generates:
+  remix-jokes/app/graphql/generated.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-graphql-request

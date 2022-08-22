@@ -1,0 +1,27 @@
+{
+  "name": "remix-graphql-practice",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "remix-jokes",
+      "nestjs-jokes",
+      "lib"
+    ]
+  },
+  "scripts": {
+    "build": "yarn workspaces run build",
+    "dev": "run-p dev:*",
+    "dev:remix-jokes": "yarn workspace remix-jokes run dev",
+    "dev:nestjs-jokes": "yarn workspace nestjs-jokes run dev",
+    "generate:graphql": "graphql-codegen --require dotenv/config --config codegen.yml"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^2.11.6",
+    "@graphql-codegen/typescript": "^2.7.3",
+    "@graphql-codegen/typescript-graphql-request": "^4.5.3",
+    "@graphql-codegen/typescript-operations": "^2.5.3",
+    "dotenv": "^16.0.1",
+    "npm-run-all": "^4.1.5"
+  }
+}

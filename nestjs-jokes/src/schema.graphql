@@ -1,0 +1,15 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Joke {
+  content: String!
+  id: ID!
+  name: String!
+}
+
+type Query {
+  joke(id: String!): Joke
+  jokes: [Joke!]!
+  randomJoke: Joke!
+}
