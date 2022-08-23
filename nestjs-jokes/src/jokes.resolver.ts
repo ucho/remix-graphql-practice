@@ -1,5 +1,5 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
-import { Joke } from './jokes.model';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Joke, JokeInput } from './jokes.model';
 
 const jokes: Joke[] = [
   {
@@ -54,5 +54,16 @@ export class JokesResolver {
   @Query(() => Joke)
   randomJoke(): Joke {
     return jokes[Math.floor(Math.random() * jokes.length)];
+  }
+
+  @Mutation(() => Joke)
+  addJoke(@Args('input') input: JokeInput): Joke {
+    const newJoke: Joke = {
+      id: String(jokes.length + 1),
+      name: input.name,
+      content: input.content,
+    };
+    jokes.push(newJoke);
+    return newJoke;
   }
 }

@@ -8,7 +8,7 @@ export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: stylesUrl }];
 };
 
-const JOKES_QUERY = /* GraphQL */ `
+export const JOKES_QUERY = /* GraphQL */ `
   query Jokes {
     jokes {
       id

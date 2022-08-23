@@ -3,7 +3,7 @@ import { Link, useLoaderData, useParams } from "@remix-run/react";
 import { graphqlClient } from "~/graphql.server";
 import { type JokeQuery } from "~/graphql/generated";
 
-const JOKE_QUERY = /* GraphQL */ `
+export const JOKE_QUERY = /* GraphQL */ `
   query Joke($id: String!) {
     joke(id: $id) {
       id

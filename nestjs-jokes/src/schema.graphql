@@ -8,6 +8,15 @@ type Joke {
   name: String!
 }
 
+input JokeInput {
+  content: String!
+  name: String!
+}
+
+type Mutation {
+  addJoke(input: JokeInput!): Joke!
+}
+
 type Query {
   joke(id: String!): Joke
   jokes: [Joke!]!

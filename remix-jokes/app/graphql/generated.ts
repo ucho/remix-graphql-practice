@@ -22,6 +22,21 @@ export type Joke = {
   name: Scalars['String'];
 };
 
+export type JokeInput = {
+  content: Scalars['String'];
+  name: Scalars['String'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  addJoke: Joke;
+};
+
+
+export type MutationAddJokeArgs = {
+  input: JokeInput;
+};
+
 export type Query = {
   __typename?: 'Query';
   joke?: Maybe<Joke>;
@@ -51,6 +66,13 @@ export type RandomJokeQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type RandomJokeQuery = { __typename?: 'Query', randomJoke: { __typename?: 'Joke', id: string, name: string, content: string } };
 
+export type AddJokeMutationVariables = Exact<{
+  input: JokeInput;
+}>;
+
+
+export type AddJokeMutation = { __typename?: 'Mutation', addJoke: { __typename?: 'Joke', id: string } };
+
 
 export const JokesDocument = gql`
     query Jokes {
@@ -78,6 +100,13 @@ export const RandomJokeDocument = gql`
   }
 }
     `;
+export const AddJokeDocument = gql`
+    mutation AddJoke($input: JokeInput!) {
+  addJoke(input: $input) {
+    id
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -94,6 +123,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     RandomJoke(variables?: RandomJokeQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RandomJokeQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<RandomJokeQuery>(RandomJokeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'RandomJoke', 'query');
+    },
+    AddJoke(variables: AddJokeMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AddJokeMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AddJokeMutation>(AddJokeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AddJoke', 'mutation');
     }
   };
 }
